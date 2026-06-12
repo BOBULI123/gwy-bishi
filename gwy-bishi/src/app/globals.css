@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f6f4ee;
+  --foreground: #1b2524;
+  --paper: #fffcf4;
+  --ink: #20312f;
+  --mint: #0f766e;
+  --cinnabar: #b43b28;
+  --gold: #c58b1b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-geist-sans), "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+::selection {
+  background: rgba(180, 59, 40, 0.18);
+}
+
+.paper-grid {
+  background-image:
+    linear-gradient(rgba(32, 49, 47, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 49, 47, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.ink-shadow {
+  box-shadow: 0 18px 50px rgba(27, 37, 36, 0.10);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
