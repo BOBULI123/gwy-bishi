@@ -31,7 +31,7 @@ src/
     question-bank-client.tsx  题库筛选分页
     question-detail.tsx       行测/申论详情交互
     site-header.tsx           顶部导航
-  data/questions.ts           500道行测、500道申论模拟题数据
+  data/questions.ts           1000道行测、1000道申论模拟题数据
   lib/storage.ts              localStorage限制、收藏、模考状态
   lib/utils.ts                通用工具
 ```

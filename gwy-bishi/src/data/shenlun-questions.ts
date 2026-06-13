@@ -406,7 +406,7 @@ function createGeneratedShenlunQuestion(index: number): ShenlunQuestion {
 }
 
 const generatedShenlunQuestions = Array.from(
-  { length: Math.max(0, 500 - shenlunSeedQuestions.length) },
+  { length: Math.max(0, 1000 - shenlunSeedQuestions.length) },
   (_, index) => createGeneratedShenlunQuestion(index),
 );
 

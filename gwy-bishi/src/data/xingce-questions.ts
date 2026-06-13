@@ -860,7 +860,7 @@ function createGeneratedXingceQuestion(index: number): XingceQuestion {
 }
 
 const generatedXingceQuestions = Array.from(
-  { length: Math.max(0, 500 - xingceSeedQuestions.length) },
+  { length: Math.max(0, 1000 - xingceSeedQuestions.length) },
   (_, index) => createGeneratedXingceQuestion(index),
 );
 
