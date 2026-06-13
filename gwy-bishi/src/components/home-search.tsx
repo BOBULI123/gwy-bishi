@@ -20,7 +20,7 @@ export function HomeSearch() {
         <Input
           value={keyword}
           onChange={(event) => setKeyword(event.target.value)}
-          placeholder="搜索真题关键词，如“言语理解”“申论范文”..."
+          placeholder="搜索练习关键词，如“言语理解”“申论范文”..."
           className="border-0 text-base focus:ring-0"
         />
         <Button className="shrink-0" onClick={() => setKeyword(keyword.trim())}>
@@ -55,7 +55,7 @@ export function HomeSearch() {
               ))}
             </div>
           ) : (
-            <p className="p-3 text-sm text-ink/60">暂未找到匹配真题。</p>
+            <p className="p-3 text-sm text-ink/60">暂未找到匹配题目。</p>
           )}
         </div>
       ) : null}

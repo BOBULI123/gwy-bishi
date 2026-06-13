@@ -117,7 +117,7 @@ export function MockExamClient() {
         </CardHeader>
         <CardContent className="space-y-5">
           <p className="text-base leading-8 text-ink/68">
-            随机抽取15道真题（言语5+数量2+判断4+资料3+常识1），限时15分钟。
+            随机抽取15道练习题（言语5+数量2+判断4+资料3+常识1），限时15分钟。
           </p>
           <Button size="lg" onClick={startExam}>
             开始模考

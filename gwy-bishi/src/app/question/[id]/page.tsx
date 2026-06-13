@@ -17,16 +17,16 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: PageProps): Metadata {
   const question = getQuestionById(decodeURIComponent(params.id));
   if (!question) {
-    return { title: "真题不存在" };
+    return { title: "题目不存在" };
   }
   if (question.examType === "xingce") {
     return {
-      title: `${question.year}${question.province}行测真题_${question.moduleName}_${question.knowledgePoint}`,
+      title: `${question.year}${question.province}行测模拟题_${question.moduleName}_${question.knowledgePoint}`,
       description: truncateText(question.content, 120),
     };
   }
   return {
-    title: `${question.year}${question.province}申论真题_${question.questionTypeName}_${question.theme}`,
+    title: `${question.year}${question.province}申论模拟题_${question.questionTypeName}_${question.theme}`,
     description: truncateText(question.questions[0].requirement, 120),
   };
 }
@@ -36,7 +36,7 @@ export default function QuestionPage({ params }: PageProps) {
   if (!question) notFound();
 
   const sectionHref = question.examType === "xingce" ? "/xingce" : "/shenlun";
-  const sectionLabel = question.examType === "xingce" ? "行测真题库" : "申论真题库";
+  const sectionLabel = question.examType === "xingce" ? "行测模拟题库" : "申论模拟题库";
   const moduleLabel = question.examType === "xingce" ? question.moduleName : question.questionTypeName;
 
   return (

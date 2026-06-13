@@ -132,7 +132,7 @@ export function QuestionBankClient({
       <div className="flex items-center justify-between">
         <Badge tone="ink">
           <Filter className="mr-1 h-3 w-3" />
-          共 {filtered.length} 道真题
+          共 {filtered.length} 道题目
         </Badge>
         <span className="text-sm text-ink/55">每页10题</span>
       </div>

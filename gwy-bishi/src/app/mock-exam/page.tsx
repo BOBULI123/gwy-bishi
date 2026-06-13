@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: "15分钟行测快闪模考",
-  description: "随机抽取15道公务员行测真题，限时15分钟完成并查看模块正确率与错题解析。",
+  description: "随机抽取15道公务员行测练习题，限时15分钟完成并查看模块正确率与错题解析。",
 };
 
 export default function MockExamPage() {

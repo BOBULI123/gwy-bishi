@@ -1,13 +1,15 @@
 ﻿# gwy-bishi
 
-公务员笔试真题库应用，基于 Next.js 14 App Router、TypeScript、Tailwind CSS 和本地 shadcn 风格组件构建。
+公务员笔试模拟题库应用，基于 Next.js 14 App Router、TypeScript、Tailwind CSS 和本地 shadcn 风格组件构建。
+
+> 当前题库为备考模拟练习题，不标称官方原题。若要建设真实历年题库，需要按题目逐条补充来源、年份、地区和公开资料链接。
 
 ## 功能
 
-- 首页 Hero、搜索、行测/申论入口、15分钟模考入口、最新真题展示
+- 首页 Hero、搜索、行测/申论入口、15分钟模考入口、最新练习展示
 - 行测题库：模块、年份、省份、难度、关键词筛选，10题分页
 - 申论题库：题型、年份、省份、关键词筛选
-- 真题详情：行测作答判题、深度解析、收藏、PDF会员提示、相关推荐
+- 题目详情：行测作答判题、深度解析、收藏、PDF会员提示、相关推荐
 - 申论详情：材料折叠、答题思路/作答框架/参考范文三版本解析
 - 模考：15分钟15题，保存答题状态，交卷后显示得分、模块正确率、错题解析
 - API：`/api/parse` 调用兼容模型服务，未配置密钥时返回演示解析
@@ -19,7 +21,7 @@ src/
   app/
     api/parse/route.ts        解析接口
     mock-exam/page.tsx        模考页
-    question/[id]/page.tsx    真题详情页与SEO metadata
+    question/[id]/page.tsx    题目详情页与SEO metadata
     shenlun/page.tsx          申论题库页
     xingce/page.tsx           行测题库页
     layout.tsx                全局布局与站点metadata
