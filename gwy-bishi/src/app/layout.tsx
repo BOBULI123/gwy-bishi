@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description:
     "覆盖国考、各省省考、事业单位笔试真题，行测深度解析+申论三版本范文，每日更新，助你上岸。",
   keywords: "公务员笔试真题,国考行测真题,省考申论真题,行测题库,申论范文,事业单位笔试",
+  verification: {
+    google: "3CiCI9H-cGunaJ1EG1xVaZlFMeQoIWcdghrWqSp3dc4",
+  },
 };
 
 export default function RootLayout({
