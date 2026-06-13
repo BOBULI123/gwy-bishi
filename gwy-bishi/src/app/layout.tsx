@@ -5,10 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "公务员笔试模拟题库 - 2015-2026国考省考行测申论练习及深度解析",
-  description:
-    "覆盖国考、各省省考、事业单位笔试模拟练习，行测深度解析+申论三版本范文，系统刷题助你备考。",
-  keywords: "公务员笔试模拟题,国考行测练习,省考申论模拟题,行测题库,申论范文,事业单位笔试",
+  title: "公务员笔试真题来源库 - 国考省考行测申论公开资料索引",
+  description: "汇总公开可访问的公务员行测申论真题来源，保留年份、地区、题型和出处链接。",
+  keywords: "公务员笔试真题来源,国考行测真题,省考申论真题,行测题库,申论真题,事业单位笔试",
   verification: {
     google: "3CiCI9H-cGunaJ1EG1xVaZlFMeQoIWcdghrWqSp3dc4",
     other: {

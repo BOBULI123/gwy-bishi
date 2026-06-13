@@ -1,6 +1,3 @@
-﻿import { xingceQuestions, xingceModuleMap, xingceProvinces, xingceYears } from "./xingce-questions";
-import { shenlunQuestions, shenlunTypeMap, shenlunProvinces, shenlunYears } from "./shenlun-questions";
-
 export type ExamType = "xingce" | "shenlun";
 export type Difficulty = "easy" | "medium" | "hard";
 
@@ -45,8 +42,31 @@ export type ShenlunQuestion = {
 
 export type Question = XingceQuestion | ShenlunQuestion;
 
-export { xingceQuestions, xingceModuleMap, xingceProvinces, xingceYears };
-export { shenlunQuestions, shenlunTypeMap, shenlunProvinces, shenlunYears };
+export const xingceQuestions: XingceQuestion[] = [];
+export const shenlunQuestions: ShenlunQuestion[] = [];
+export const allQuestions: Question[] = [];
+export const questions = allQuestions;
+
+export const xingceModuleMap: Record<XingceModule, string> = {
+  yanyu: "言语理解",
+  shuliang: "数量关系",
+  panduan: "判断推理",
+  ziliao: "资料分析",
+  changshi: "常识判断",
+};
+
+export const shenlunTypeMap: Record<ShenlunType, string> = {
+  gaikuo: "概括归纳",
+  zonghefenxi: "综合分析",
+  duice: "提出对策",
+  zhixing: "贯彻执行",
+  zuowen: "大作文",
+};
+
+export const xingceProvinces = ["国考", "北京", "上海", "广东", "江苏", "浙江", "山东", "河南", "四川", "湖北", "湖南", "安徽", "福建", "河北", "山西", "辽宁"];
+export const shenlunProvinces = xingceProvinces;
+export const xingceYears = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015];
+export const shenlunYears = xingceYears;
 
 export const xingceModules = Object.entries(xingceModuleMap).map(([value, label]) => ({
   value: value as XingceModule,
@@ -59,9 +79,6 @@ export const shenlunTypes = Object.entries(shenlunTypeMap).map(([value, label]) 
 }));
 
 export const provinces = Array.from(new Set([...xingceProvinces, ...shenlunProvinces]));
-
-export const allQuestions: Question[] = [...xingceQuestions, ...shenlunQuestions];
-export const questions = allQuestions;
 
 export function getQuestionById(id: string) {
   return allQuestions.find((question) => question.id === id);

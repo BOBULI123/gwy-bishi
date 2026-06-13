@@ -10,7 +10,7 @@ export function SiteHeader() {
           <span className="flex h-9 w-9 items-center justify-center rounded-card bg-ink text-white">
             <BookOpenCheck className="h-5 w-5" />
           </span>
-          公务员笔试模拟题库
+          公务员笔试真题来源库
         </Link>
         <nav className="flex items-center gap-1">
           <Link href="/xingce" className={buttonVariants({ variant: "ghost", size: "sm" })}>

@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/breadcrumb";
-import { QuestionBankClient } from "@/components/question-bank-client";
+import { RealSourceBankClient } from "@/components/real-source-bank-client";
 import { SiteHeader } from "@/components/site-header";
-import { shenlunQuestions } from "@/data/questions";
+import { getRealQuestionSources } from "@/data/real-question-sources";
 
 export const metadata: Metadata = {
-  title: "申论模拟题库",
-  description: "2015-2026公务员申论模拟题库，覆盖概括归纳、综合分析、提出对策、贯彻执行和大作文。",
+  title: "申论真题来源库",
+  description: "公开可访问的公务员申论真题来源索引，保留年份、地区、题型和出处链接。",
 };
 
 export default function ShenlunPage() {
+  const sources = getRealQuestionSources("shenlun");
+
   return (
     <main className="min-h-screen paper-grid">
       <SiteHeader />
       <section className="mx-auto max-w-6xl px-4 py-8">
-        <Breadcrumb items={[{ label: "首页", href: "/" }, { label: "申论模拟题库" }]} />
+        <Breadcrumb items={[{ label: "首页", href: "/" }, { label: "申论真题来源库" }]} />
         <div className="mb-6">
-          <h1 className="text-3xl font-black text-ink">申论模拟题库</h1>
+          <h1 className="text-3xl font-black text-ink">申论真题来源库</h1>
           <p className="mt-2 text-ink/62">
-            覆盖五类申论题型，支持材料、主题、年份和地区筛选。
+            优先展示可追溯出处的申论试卷、参考答案和解析资料。
           </p>
         </div>
-        <QuestionBankClient examType="shenlun" questions={shenlunQuestions} />
+        <RealSourceBankClient sources={sources} />
       </section>
     </main>
   );

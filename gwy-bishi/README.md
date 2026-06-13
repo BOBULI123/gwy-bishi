@@ -1,17 +1,16 @@
-﻿# gwy-bishi
+# gwy-bishi
 
-公务员笔试模拟题库应用，基于 Next.js 14 App Router、TypeScript、Tailwind CSS 和本地 shadcn 风格组件构建。
+公务员笔试真题来源库应用，基于 Next.js 14 App Router、TypeScript、Tailwind CSS 和本地 shadcn 风格组件构建。
 
-> 当前题库为备考模拟练习题，不标称官方原题。若要建设真实历年题库，需要按题目逐条补充来源、年份、地区和公开资料链接。
+> 当前站内展示已切换为公开可访问的真题来源索引。为避免版权和真实性风险，站内不批量复制第三方题目全文；真题正文以原始来源页面为准。
 
 ## 功能
 
-- 首页 Hero、搜索、行测/申论入口、15分钟模考入口、最新练习展示
-- 行测题库：模块、年份、省份、难度、关键词筛选，10题分页
-- 申论题库：题型、年份、省份、关键词筛选
-- 题目详情：行测作答判题、深度解析、收藏、PDF会员提示、相关推荐
-- 申论详情：材料折叠、答题思路/作答框架/参考范文三版本解析
-- 模考：15分钟15题，保存答题状态，交卷后显示得分、模块正确率、错题解析
+- 首页 Hero、搜索、行测/申论入口、最新真题来源展示
+- 行测来源库：年份、地区、题型、来源关键词筛选，10条分页
+- 申论来源库：年份、地区、题型、来源关键词筛选，10条分页
+- 来源卡片：保留出处链接和来源说明，点击跳转原始网页
+- 模考：等待真实题目正文授权或官方来源导入后开放
 - API：`/api/parse` 调用兼容模型服务，未配置密钥时返回演示解析
 
 ## 文件结构
@@ -20,20 +19,20 @@
 src/
   app/
     api/parse/route.ts        解析接口
-    mock-exam/page.tsx        模考页
-    question/[id]/page.tsx    题目详情页与SEO metadata
-    shenlun/page.tsx          申论题库页
-    xingce/page.tsx           行测题库页
+    mock-exam/page.tsx        模考导入提示页
+    question/[id]/page.tsx    预留题目详情页
+    shenlun/page.tsx          申论来源库页
+    xingce/page.tsx           行测来源库页
     layout.tsx                全局布局与站点metadata
     page.tsx                  首页
   components/
     ui/                       Card/Button/Badge/Tabs/Input等组件
-    home-search.tsx           首页搜索
-    mock-exam-client.tsx      模考交互
-    question-bank-client.tsx  题库筛选分页
-    question-detail.tsx       行测/申论详情交互
+    home-search.tsx           首页来源搜索
+    real-source-bank-client.tsx 来源筛选分页
+    real-source-card.tsx      来源卡片
     site-header.tsx           顶部导航
-  data/questions.ts           1000道行测、1000道申论模拟题数据
+  data/real-question-sources.ts  可追溯真题来源索引数据
+  data/questions.ts           预留结构化题目类型，当前不导出模拟题
   lib/storage.ts              localStorage限制、收藏、模考状态
   lib/utils.ts                通用工具
 ```
@@ -72,5 +71,3 @@ npm run build
 2. 在 Vercel 导入仓库。
 3. 添加环境变量 `OPENAI_API_KEY`。
 4. 使用默认构建命令 `npm run build` 和输出配置即可。
-
-

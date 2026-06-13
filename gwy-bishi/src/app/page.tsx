@@ -4,13 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { HomeSearch } from "@/components/home-search";
-import { QuestionCard } from "@/components/question-card";
+import { RealSourceCard } from "@/components/real-source-card";
 import { SiteHeader } from "@/components/site-header";
-import { getLatestShenlun, getLatestXingce } from "@/data/questions";
+import { getRealQuestionSources } from "@/data/real-question-sources";
 
 export default function Home() {
-  const latestXingce = getLatestXingce(10);
-  const latestShenlun = getLatestShenlun(5);
+  const latestXingce = getRealQuestionSources("xingce").slice(0, 10);
+  const latestShenlun = getRealQuestionSources("shenlun").slice(0, 5);
 
   return (
     <main className="min-h-screen paper-grid">
@@ -22,19 +22,19 @@ export default function Home() {
             每日更新 · 深度解析
           </Badge>
           <h1 className="mx-auto max-w-5xl text-balance text-4xl font-black leading-tight text-ink md:text-6xl">
-            公务员笔试模拟题库 - 2015-2026国考省考行测申论练习及深度解析
+            公务员笔试真题来源库 - 国考省考行测申论公开资料索引
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-ink/68">
-            覆盖国考、各省省考、事业单位笔试模拟练习，行测深度解析+申论三版本范文，助你备考
+            汇总公开可访问的国考、省考行测申论真题来源，逐条保留出处链接，避免把模拟题冒充真题
           </p>
           <div className="mt-8">
             <HomeSearch />
           </div>
           <p className="mt-5 text-sm font-semibold text-ink/58">
-            收录1,000道行测模拟题 | 1,000道申论模拟题 | 覆盖多省份 | 系统练习
+            已核验公开来源索引 | 保留原始出处 | 不复制第三方全文
           </p>
           <p className="mx-auto mt-2 max-w-3xl text-xs leading-5 text-ink/45">
-            题目用于备考训练与能力提升，不标称官方原题；如需真实历年试题，应以招录机关和考试机构公开资料为准。
+            真题正文以原始来源页面为准；站内先提供来源索引，后续可在取得授权或官方PDF后逐题结构化导入。
           </p>
         </div>
       </section>
@@ -46,7 +46,7 @@ export default function Home() {
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-card bg-mint text-white">
                 <Calculator className="h-6 w-6" />
               </div>
-              <CardTitle className="text-2xl">行测模拟题库</CardTitle>
+              <CardTitle className="text-2xl">行测真题来源</CardTitle>
               <CardDescription>
                 言语理解、数量关系、判断推理、资料分析、常识判断
               </CardDescription>
@@ -59,7 +59,7 @@ export default function Home() {
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-card bg-gold text-white">
                 <FileText className="h-6 w-6" />
               </div>
-              <CardTitle className="text-2xl">申论模拟题库</CardTitle>
+              <CardTitle className="text-2xl">申论真题来源</CardTitle>
               <CardDescription>
                 概括归纳、综合分析、提出对策、贯彻执行、大作文
               </CardDescription>
@@ -78,7 +78,7 @@ export default function Home() {
               </Badge>
               <h2 className="text-2xl font-black">15分钟行测快闪模考</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-white/72">
-                随机抽取15道练习题，限时训练，测试你的水平
+                站内真题正文完成授权导入后，再开启限时训练
               </p>
             </div>
             <Link href="/mock-exam" className={buttonVariants({ variant: "secondary", size: "lg" })}>
@@ -94,7 +94,7 @@ export default function Home() {
           <div className="mb-4 flex items-end justify-between">
             <div>
               <Badge tone="mint">2026最新</Badge>
-              <h2 className="mt-2 text-2xl font-black text-ink">最新行测练习</h2>
+              <h2 className="mt-2 text-2xl font-black text-ink">最新行测来源</h2>
             </div>
             <Link href="/xingce" className="text-sm font-bold text-mint">
               查看全部
@@ -102,7 +102,7 @@ export default function Home() {
           </div>
           <div className="grid gap-3">
             {latestXingce.map((question) => (
-              <QuestionCard key={question.id} question={question} />
+              <RealSourceCard key={question.id} source={question} />
             ))}
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function Home() {
           <div className="mb-4 flex items-end justify-between">
             <div>
               <Badge tone="gold">申论范文</Badge>
-              <h2 className="mt-2 text-2xl font-black text-ink">最新申论练习</h2>
+              <h2 className="mt-2 text-2xl font-black text-ink">最新申论来源</h2>
             </div>
             <Link href="/shenlun" className="text-sm font-bold text-mint">
               查看全部
@@ -118,7 +118,7 @@ export default function Home() {
           </div>
           <div className="grid gap-3">
             {latestShenlun.map((question) => (
-              <QuestionCard key={question.id} question={question} />
+              <RealSourceCard key={question.id} source={question} />
             ))}
           </div>
         </div>
