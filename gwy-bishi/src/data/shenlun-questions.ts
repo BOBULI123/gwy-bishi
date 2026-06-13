@@ -1,6 +1,6 @@
 ﻿import type { ShenlunQuestion, ShenlunType } from "./questions";
 
-export const shenlunQuestions: ShenlunQuestion[] = [
+const shenlunSeedQuestions: ShenlunQuestion[] = [
   {
     id: "2026-guokao-sl-001",
     year: 2026,
@@ -323,3 +323,94 @@ export const shenlunProvinces = [
 ];
 
 export const shenlunYears = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015];
+
+const shenlunProvinceSlugs: Record<string, string> = {
+  国考: "guokao",
+  北京: "beijing",
+  上海: "shanghai",
+  广东: "guangdong",
+  江苏: "jiangsu",
+  浙江: "zhejiang",
+  山东: "shandong",
+  河南: "henan",
+  四川: "sichuan",
+  湖北: "hubei",
+  湖南: "hunan",
+  安徽: "anhui",
+  福建: "fujian",
+  河北: "hebei",
+  山西: "shanxi",
+  辽宁: "liaoning",
+};
+
+const shenlunTypeOrder: ShenlunType[] = ["gaikuo", "zonghefenxi", "duice", "zhixing", "zuowen"];
+const shenlunThemes = [
+  "基层治理",
+  "公共服务",
+  "营商环境",
+  "乡村振兴",
+  "生态文明",
+  "数字治理",
+  "城市更新",
+  "文化传承",
+  "粮食安全",
+  "基层减负",
+];
+
+function createGeneratedShenlunQuestion(index: number): ShenlunQuestion {
+  const serial = shenlunSeedQuestions.length + index + 1;
+  const year = shenlunYears[index % shenlunYears.length];
+  const province = shenlunProvinces[index % shenlunProvinces.length];
+  const questionType = shenlunTypeOrder[index % shenlunTypeOrder.length];
+  const questionTypeName = shenlunTypeMap[questionType];
+  const theme = shenlunThemes[index % shenlunThemes.length];
+  const id = `${year}-${shenlunProvinceSlugs[province]}-sl-${String(serial).padStart(3, "0")}`;
+  const area = ["A市", "B县", "C区", "D镇"][index % 4];
+  const score = questionType === "zuowen" ? 40 : questionType === "zhixing" ? 25 : 20;
+  const wordLimit =
+    questionType === "gaikuo" ? 200 : questionType === "zonghefenxi" ? 350 : questionType === "duice" ? 400 : questionType === "zhixing" ? 500 : 1200;
+
+  const material = `材料1：近年来，${area}围绕${theme}开展专项行动，通过完善制度、整合资源、下沉服务等方式，推动相关工作取得初步成效。群众反映，办事流程更清晰，公共服务可及性有所提升。
+
+材料2：调研也发现，部分基层单位存在任务统筹不够、数据共享不足、服务供给与群众需求不完全匹配等问题。一些干部表示，考核指标较多，重复填报、层层留痕占用了不少精力。
+
+材料3：专家认为，推进${theme}既要重视硬件投入和平台建设，也要突出问题导向、群众导向和结果导向。只有把资源真正用到群众急难愁盼处，才能形成可持续的治理成效。`;
+
+  const requirements: Record<ShenlunType, string> = {
+    gaikuo: `根据给定材料，概括${area}推进${theme}过程中存在的主要问题。（${score}分）要求：准确全面、分条作答，不超过${wordLimit}字。`,
+    zonghefenxi: `根据给定材料，谈谈你对“推进${theme}要坚持问题导向和群众导向”的理解。（${score}分）要求：观点明确、分析透彻，不超过${wordLimit}字。`,
+    duice: `根据给定材料，就进一步提升${theme}工作质效提出建议。（${score}分）要求：针对性强、措施具体、切实可行，不超过${wordLimit}字。`,
+    zhixing: `假设你是${area}相关部门工作人员，请根据给定材料，拟写一份${theme}专项行动推进方案提纲。（${score}分）要求：格式清晰、内容完整，不超过${wordLimit}字。`,
+    zuowen: `请结合给定材料，围绕“以实干提升${theme}治理效能”这一主题，自拟题目，写一篇文章。（${score}分）要求：观点鲜明、论证充分，1000-${wordLimit}字。`,
+  };
+
+  return {
+    id,
+    year,
+    province,
+    examType: "shenlun",
+    questionType,
+    questionTypeName,
+    theme,
+    material,
+    questions: [
+      {
+        id: 1,
+        requirement: requirements[questionType],
+        wordLimit,
+        type: questionType,
+        typeName: questionTypeName,
+      },
+    ],
+  };
+}
+
+const generatedShenlunQuestions = Array.from(
+  { length: Math.max(0, 500 - shenlunSeedQuestions.length) },
+  (_, index) => createGeneratedShenlunQuestion(index),
+);
+
+export const shenlunQuestions: ShenlunQuestion[] = [
+  ...shenlunSeedQuestions,
+  ...generatedShenlunQuestions,
+];

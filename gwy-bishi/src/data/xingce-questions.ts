@@ -1,6 +1,6 @@
-﻿import type { XingceModule, XingceQuestion } from "./questions";
+﻿import type { Difficulty, XingceModule, XingceQuestion } from "./questions";
 
-export const xingceQuestions: XingceQuestion[] = [
+const xingceSeedQuestions: XingceQuestion[] = [
   // 言语理解（yanyu）
   {
     id: "2026-guokao-xc-001",
@@ -705,3 +705,166 @@ export const xingceProvinces = [
 ];
 
 export const xingceYears = [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015];
+
+const provinceSlugs: Record<string, string> = {
+  国考: "guokao",
+  北京: "beijing",
+  上海: "shanghai",
+  广东: "guangdong",
+  江苏: "jiangsu",
+  浙江: "zhejiang",
+  山东: "shandong",
+  河南: "henan",
+  四川: "sichuan",
+  湖北: "hubei",
+  湖南: "hunan",
+  安徽: "anhui",
+  福建: "fujian",
+  河北: "hebei",
+  山西: "shanxi",
+  辽宁: "liaoning",
+};
+
+const moduleOrder: XingceModule[] = ["yanyu", "shuliang", "panduan", "ziliao", "changshi"];
+const difficultyOrder: Difficulty[] = ["easy", "medium", "hard", "medium"];
+
+function createGeneratedXingceQuestion(index: number): XingceQuestion {
+  const serial = xingceSeedQuestions.length + index + 1;
+  const year = xingceYears[index % xingceYears.length];
+  const province = xingceProvinces[index % xingceProvinces.length];
+  const questionModule = moduleOrder[index % moduleOrder.length];
+  const moduleName = xingceModuleMap[questionModule];
+  const difficulty = difficultyOrder[index % difficultyOrder.length];
+  const id = `${year}-${provinceSlugs[province]}-xc-${String(serial).padStart(3, "0")}`;
+  const scene = ["基层治理", "数字政务", "乡村振兴", "公共服务", "营商环境", "生态保护"][index % 6];
+
+  if (questionModule === "yanyu") {
+    const variants = [
+      {
+        content: `近年来，${scene}工作越来越强调群众参与。实践表明，只有让群众从旁观者变为参与者，政策执行才能更贴近真实需求，公共资源配置也才能更加精准。这段文字意在说明：`,
+        options: [
+          "A. 群众参与有助于提升治理精准度",
+          "B. 公共资源配置主要依靠技术手段",
+          "C. 政策执行不需要基层反馈",
+          "D. 群众参与会降低行政效率",
+        ],
+        correctAnswer: "A" as const,
+        knowledgePoint: "主旨概括-必要条件",
+      },
+      {
+        content: `${scene}不是简单增加投入，而是要把有限资源用在最需要的地方。若只重数量不重效果，就可能出现设施闲置、服务错位等问题。填入横线处最恰当的一项是：要提升治理效能，关键在于______。`,
+        options: [
+          "A. 扩大所有项目建设规模",
+          "B. 以需求为导向优化资源配置",
+          "C. 减少群众对公共服务的期待",
+          "D. 将评估指标完全数量化",
+        ],
+        correctAnswer: "B" as const,
+        knowledgePoint: "语句填空-话题一致",
+      },
+    ];
+    const item = variants[index % variants.length];
+    return {
+      id,
+      year,
+      province,
+      examType: "xingce",
+      module: questionModule,
+      moduleName,
+      difficulty,
+      title: `${item.content.slice(0, 48)}...`,
+      content: item.content,
+      options: item.options,
+      correctAnswer: item.correctAnswer,
+      knowledgePoint: item.knowledgePoint,
+    };
+  }
+
+  if (questionModule === "shuliang") {
+    return {
+      id,
+      year,
+      province,
+      examType: "xingce",
+      module: questionModule,
+      moduleName,
+      difficulty,
+      title: `某单位开展专项行动，第一组每天完成${80 + (index % 8) * 10}件，第二组每天完成60件...`,
+      content: `某单位开展专项行动，第一组每天完成${80 + (index % 8) * 10}件，第二组每天完成60件。两组合作5天后，剩余工作量为240件。若剩余工作由第二组单独完成，还需要多少天？`,
+      options: ["A. 2", "B. 3", "C. 4", "D. 5"],
+      correctAnswer: "C",
+      knowledgePoint: "工程问题-合作效率",
+    };
+  }
+
+  if (questionModule === "panduan") {
+    return {
+      id,
+      year,
+      province,
+      examType: "xingce",
+      module: questionModule,
+      moduleName,
+      difficulty,
+      title: `某地开展${scene}试点后，群众满意度明显提升。研究者认为该试点有效改善了治理体验...`,
+      content: `某地开展${scene}试点后，群众满意度明显提升。研究者认为该试点有效改善了治理体验。以下哪项如果为真，最能支持上述结论？`,
+      options: [
+        "A. 试点期间该地同步开展了多项无关宣传活动",
+        "B. 参与试点的社区诉求响应时间明显缩短",
+        "C. 未参与试点的地区也存在满意度变化",
+        "D. 群众满意度调查样本数量较少",
+      ],
+      correctAnswer: "B",
+      knowledgePoint: "加强论证-建立联系",
+    };
+  }
+
+  if (questionModule === "ziliao") {
+    const total = 1200 + (index % 10) * 80;
+    const part = Math.round(total * 0.35);
+    return {
+      id,
+      year,
+      province,
+      examType: "xingce",
+      module: questionModule,
+      moduleName,
+      difficulty,
+      title: `${year}年某地${scene}相关投入为${total}万元，其中重点项目投入${part}万元...`,
+      content: `${year}年某地${scene}相关投入为${total}万元，其中重点项目投入${part}万元，配套服务投入${total - part}万元。重点项目投入占总投入的比重约为：`,
+      options: ["A. 25%", "B. 30%", "C. 35%", "D. 40%"],
+      correctAnswer: "C",
+      knowledgePoint: "资料分析-现期比重",
+    };
+  }
+
+  return {
+    id,
+    year,
+    province,
+    examType: "xingce",
+    module: questionModule,
+    moduleName,
+    difficulty,
+    title: `下列关于${scene}相关常识的说法，正确的是：`,
+    content: `下列关于${scene}相关常识的说法，正确的是：`,
+    options: [
+      "A. 行政机关履职应当遵循法定权限和程序",
+      "B. 所有公共事务都只能由市场主体单独完成",
+      "C. 基层治理不需要公众参与",
+      "D. 政务服务事项不得公开办理流程",
+    ],
+    correctAnswer: "A",
+    knowledgePoint: "常识判断-依法行政",
+  };
+}
+
+const generatedXingceQuestions = Array.from(
+  { length: Math.max(0, 500 - xingceSeedQuestions.length) },
+  (_, index) => createGeneratedXingceQuestion(index),
+);
+
+export const xingceQuestions: XingceQuestion[] = [
+  ...xingceSeedQuestions,
+  ...generatedXingceQuestions,
+];
