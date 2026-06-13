@@ -31,7 +31,7 @@ src/
     question-bank-client.tsx  题库筛选分页
     question-detail.tsx       行测/申论详情交互
     site-header.tsx           顶部导航
-  data/questions.ts           25道行测、10道申论模拟真题数据
+  data/questions.ts           35道行测、15道申论模拟真题数据
   lib/storage.ts              localStorage限制、收藏、模考状态
   lib/utils.ts                通用工具
 ```
@@ -70,4 +70,5 @@ npm run build
 2. 在 Vercel 导入仓库。
 3. 添加环境变量 `OPENAI_API_KEY`。
 4. 使用默认构建命令 `npm run build` 和输出配置即可。
+
 

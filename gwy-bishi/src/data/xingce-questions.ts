@@ -484,6 +484,196 @@ export const xingceQuestions: XingceQuestion[] = [
     ],
     correctAnswer: "B",
     knowledgePoint: "人文常识-传统节日"
+  },
+  {
+    id: "2026-hubei-xc-001",
+    year: 2026,
+    province: "湖北",
+    examType: "xingce",
+    module: "yanyu",
+    moduleName: "言语理解",
+    difficulty: "medium",
+    title: "公共政策的温度，不仅体现在制度设计的宏观目标上，也体现在执行过程中的细节回应...",
+    content: "公共政策的温度，不仅体现在制度设计的宏观目标上，也体现在执行过程中的细节回应。对群众而言，一项政策是否可感可及，往往取决于办理流程是否简便、咨询渠道是否畅通、特殊群体是否被照顾。只有把政策条文转化为具体服务，才能让治理成效真正抵达日常生活。最适合概括这段文字主旨的是：",
+    options: [
+      "A. 政策制定应重视宏观目标",
+      "B. 政策执行要注重服务细节和群众感受",
+      "C. 群众咨询渠道决定政策成败",
+      "D. 特殊群体是公共政策的唯一对象"
+    ],
+    correctAnswer: "B",
+    knowledgePoint: "主旨概括-对策句"
+  },
+  {
+    id: "2026-shanghai-xc-001",
+    year: 2026,
+    province: "上海",
+    examType: "xingce",
+    module: "yanyu",
+    moduleName: "言语理解",
+    difficulty: "hard",
+    title: "在城市治理中，精细化并不意味着无限增加管理颗粒度，而是要在必要的信息采集与合理的治理成本之间...",
+    content: "在城市治理中，精细化并不意味着无限增加管理颗粒度，而是要在必要的信息采集与合理的治理成本之间找到平衡。若过度追求数据完整，基层可能陷入反复填报；若信息过于粗疏，又难以及时发现风险。因此，精细化治理的关键在于______。填入横线处最恰当的是：",
+    options: [
+      "A. 建立覆盖所有事项的台账体系",
+      "B. 以适度、有效的信息支撑精准决策",
+      "C. 将数据采集作为基层工作的中心",
+      "D. 减少所有形式的城市治理干预"
+    ],
+    correctAnswer: "B",
+    knowledgePoint: "语句填空-前后照应"
+  },
+  {
+    id: "2026-hunan-xc-001",
+    year: 2026,
+    province: "湖南",
+    examType: "xingce",
+    module: "shuliang",
+    moduleName: "数量关系",
+    difficulty: "medium",
+    title: "某社区组织志愿服务，第一天完成总任务的1/4，第二天完成剩余任务的1/3...",
+    content: "某社区组织志愿服务，第一天完成总任务的1/4，第二天完成剩余任务的1/3，第三天又完成剩余任务的1/2，此时还剩30户未服务。问该社区本次计划服务多少户？",
+    options: [
+      "A. 120",
+      "B. 150",
+      "C. 180",
+      "D. 210"
+    ],
+    correctAnswer: "A",
+    knowledgePoint: "分数应用题-逆推法"
+  },
+  {
+    id: "2026-anhui-xc-001",
+    year: 2026,
+    province: "安徽",
+    examType: "xingce",
+    module: "shuliang",
+    moduleName: "数量关系",
+    difficulty: "hard",
+    title: "甲、乙两队修一条道路，甲队每天修80米，乙队每天修60米...",
+    content: "甲、乙两队修一条道路，甲队每天修80米，乙队每天修60米。若甲先修3天，乙再加入，两队合作若干天后，剩余道路由乙单独修2天完成。已知道路全长980米，问两队合作了多少天？",
+    options: [
+      "A. 4",
+      "B. 5",
+      "C. 6",
+      "D. 7"
+    ],
+    correctAnswer: "B",
+    knowledgePoint: "工程问题-分段计算"
+  },
+  {
+    id: "2026-fujian-xc-001",
+    year: 2026,
+    province: "福建",
+    examType: "xingce",
+    module: "panduan",
+    moduleName: "判断推理",
+    difficulty: "medium",
+    title: "某地推行错峰停车政策后，夜间道路拥堵明显减少。有人据此认为，错峰停车政策是缓解交通压力的主要原因...",
+    content: "某地推行错峰停车政策后，夜间道路拥堵明显减少。有人据此认为，错峰停车政策是缓解交通压力的主要原因。以下哪项如果为真，最能加强上述结论？",
+    options: [
+      "A. 同期该地新增了多条公交线路",
+      "B. 政策实施区域的违停车辆数量明显下降",
+      "C. 居民对停车收费标准仍有不同意见",
+      "D. 夜间拥堵还受到天气和节假日影响"
+    ],
+    correctAnswer: "B",
+    knowledgePoint: "加强论证-解释因果"
+  },
+  {
+    id: "2026-hebei-xc-001",
+    year: 2026,
+    province: "河北",
+    examType: "xingce",
+    module: "panduan",
+    moduleName: "判断推理",
+    difficulty: "easy",
+    title: "定义判断：基层协商是指基层群众围绕公共事务，通过平等讨论形成共识并推动问题解决的过程...",
+    content: "定义判断：基层协商是指基层群众围绕公共事务，通过平等讨论形成共识并推动问题解决的过程。根据上述定义，下列属于基层协商的是：",
+    options: [
+      "A. 某社区居民代表就加装电梯方案召开议事会",
+      "B. 某企业召开年度财务审计会议",
+      "C. 某学校组织教师参加业务培训",
+      "D. 某商场根据销量调整货架位置"
+    ],
+    correctAnswer: "A",
+    knowledgePoint: "定义判断-主体与对象"
+  },
+  {
+    id: "2026-liaoning-xc-001",
+    year: 2026,
+    province: "辽宁",
+    examType: "xingce",
+    module: "ziliao",
+    moduleName: "资料分析",
+    difficulty: "medium",
+    title: "2025年某市公共文化场馆接待人数为640万人次，同比增长12%...",
+    content: "2025年某市公共文化场馆接待人数为640万人次，同比增长12%。其中，图书馆接待人数为280万人次，博物馆接待人数为160万人次，其他场馆接待人数为200万人次。2025年图书馆接待人数占公共文化场馆接待总人数的比重约为：",
+    options: [
+      "A. 37.5%",
+      "B. 40.6%",
+      "C. 43.8%",
+      "D. 46.2%"
+    ],
+    correctAnswer: "C",
+    knowledgePoint: "比重计算-现期比重"
+  },
+  {
+    id: "2026-shanxi-xc-001",
+    year: 2026,
+    province: "山西",
+    examType: "xingce",
+    module: "ziliao",
+    moduleName: "资料分析",
+    difficulty: "hard",
+    title: "2025年某省高技术制造业增加值为4200亿元，比上年增长15.8%...",
+    content: "2025年某省高技术制造业增加值为4200亿元，比上年增长15.8%，增速比规模以上工业增加值高7.2个百分点。若2024年该省高技术制造业增加值约为3627亿元，则2025年增加值同比增长量约为多少亿元？",
+    options: [
+      "A. 473",
+      "B. 526",
+      "C. 573",
+      "D. 642"
+    ],
+    correctAnswer: "C",
+    knowledgePoint: "增长量计算-现期减基期"
+  },
+  {
+    id: "2026-hubei-xc-002",
+    year: 2026,
+    province: "湖北",
+    examType: "xingce",
+    module: "changshi",
+    moduleName: "常识判断",
+    difficulty: "medium",
+    title: "下列关于行政复议的说法，正确的是：",
+    content: "下列关于行政复议的说法，正确的是：",
+    options: [
+      "A. 行政复议只能由行政机关主动启动",
+      "B. 公民、法人或者其他组织认为行政行为侵犯其合法权益的，可以依法申请行政复议",
+      "C. 行政复议期间一律停止具体行政行为的执行",
+      "D. 行政复议机关不得对行政行为的合法性进行审查"
+    ],
+    correctAnswer: "B",
+    knowledgePoint: "法律常识-行政复议"
+  },
+  {
+    id: "2026-hunan-xc-002",
+    year: 2026,
+    province: "湖南",
+    examType: "xingce",
+    module: "changshi",
+    moduleName: "常识判断",
+    difficulty: "easy",
+    title: "下列关于二十四节气的说法，正确的是：",
+    content: "下列关于二十四节气的说法，正确的是：",
+    options: [
+      "A. 立春通常标志着春季节气的开始",
+      "B. 夏至是一年中夜晚最长的一天",
+      "C. 白露之后一定不会出现高温天气",
+      "D. 小寒总是比大寒气温更低"
+    ],
+    correctAnswer: "A",
+    knowledgePoint: "人文常识-二十四节气"
   }
 ];
 
