@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bookmark, ChevronDown, ChevronUp, Download, Sparkles } from "lucide-react";
+import { Bookmark, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,12 +13,7 @@ import {
   type XingceQuestion,
   getRelatedXingce,
 } from "@/data/questions";
-import {
-  canViewAnalysis,
-  getFavoriteIds,
-  markAnalysisViewed,
-  toggleFavorite,
-} from "@/lib/storage";
+import { getFavoriteIds, toggleFavorite } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 
 type XingceAnalysis = {
@@ -56,20 +51,11 @@ async function requestAnalysis(payload: {
   return result.data;
 }
 
-function PaywallNotice() {
-  return (
-    <div className="rounded-card border border-cinnabar/20 bg-cinnabar/8 p-4 text-sm leading-6 text-cinnabar">
-      今日免费解析次数已用完（5/5），订阅会员解锁无限查看+PDF下载+错题本，首月仅需29.9元。
-    </div>
-  );
-}
-
 function XingceDetail({ question }: { question: XingceQuestion }) {
   const [selected, setSelected] = React.useState("");
   const [answerVisible, setAnswerVisible] = React.useState(false);
   const [analysis, setAnalysis] = React.useState<XingceAnalysis | null>(null);
   const [loading, setLoading] = React.useState(false);
-  const [locked, setLocked] = React.useState(false);
   const related = getRelatedXingce(question);
 
   function chooseAnswer(option: string) {
@@ -79,10 +65,6 @@ function XingceDetail({ question }: { question: XingceQuestion }) {
   }
 
   async function loadAnalysis() {
-    if (!canViewAnalysis(question.id)) {
-      setLocked(true);
-      return;
-    }
     setLoading(true);
     const data = (await requestAnalysis({
       questionId: question.id,
@@ -93,7 +75,6 @@ function XingceDetail({ question }: { question: XingceQuestion }) {
       options: question.options,
       userAnswer: selected,
     })) as XingceAnalysis;
-    markAnalysisViewed(question.id);
     setAnalysis({ ...data, correctAnswer: data.correctAnswer || question.correctAnswer });
     setLoading(false);
   }
@@ -104,7 +85,9 @@ function XingceDetail({ question }: { question: XingceQuestion }) {
         <Card>
           <CardHeader>
             <div className="flex flex-wrap gap-2">
-              <Badge tone="mint">{question.year} · {question.province}</Badge>
+              <Badge tone="mint">
+                {question.year} · {question.province}
+              </Badge>
               <Badge>{question.moduleName}</Badge>
               <Badge tone="ink">{question.knowledgePoint}</Badge>
             </div>
@@ -141,14 +124,12 @@ function XingceDetail({ question }: { question: XingceQuestion }) {
             <CardTitle>深度解析</CardTitle>
           </CardHeader>
           <CardContent>
-            {locked ? <PaywallNotice /> : null}
-            {!analysis && !locked ? (
+            {!analysis ? (
               <Button onClick={loadAnalysis} disabled={loading}>
                 <Sparkles className="h-4 w-4" />
                 {loading ? "整理中..." : "查看解析"}
               </Button>
-            ) : null}
-            {analysis ? (
+            ) : (
               <div className="space-y-4 text-sm leading-7 text-ink/78">
                 <div className="rounded-card bg-mint/8 p-4 font-semibold text-mint">
                   正确答案：{analysis.correctAnswer}
@@ -161,7 +142,7 @@ function XingceDetail({ question }: { question: XingceQuestion }) {
                   <InfoBlock title="相关考点" content={analysis.relatedTopics.join("、")} />
                 </div>
               </div>
-            ) : null}
+            )}
           </CardContent>
         </Card>
       </div>
@@ -172,16 +153,20 @@ function XingceDetail({ question }: { question: XingceQuestion }) {
             <CardTitle>同考点推荐</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {related.map((item) => (
-              <a
-                key={item.id}
-                href={`/question/${item.id}`}
-                className="block rounded-card bg-white p-3 text-sm font-semibold leading-6 text-ink hover:text-mint"
-              >
-                {item.id}
-                <span className="block text-xs font-medium text-ink/50">{item.knowledgePoint}</span>
-              </a>
-            ))}
+            {related.length ? (
+              related.map((item) => (
+                <a
+                  key={item.id}
+                  href={`/question/${item.id}`}
+                  className="block rounded-card bg-white p-3 text-sm font-semibold leading-6 text-ink hover:text-mint"
+                >
+                  {item.id}
+                  <span className="block text-xs font-medium text-ink/50">{item.knowledgePoint}</span>
+                </a>
+              ))
+            ) : (
+              <p className="text-sm leading-6 text-ink/58">暂无相关推荐。</p>
+            )}
           </CardContent>
         </Card>
       </aside>
@@ -215,13 +200,6 @@ function RelatedActions({ questionId }: { questionId: string }) {
           <Bookmark className="h-4 w-4" />
           {favorites.includes(questionId) ? "已收藏" : "收藏题目"}
         </Button>
-        <Button
-          variant="secondary"
-          onClick={() => window.alert("会员功能，即将上线")}
-        >
-          <Download className="h-4 w-4" />
-          导出PDF
-        </Button>
       </CardContent>
     </Card>
   );
@@ -238,14 +216,8 @@ function ShenlunDetail({ question }: { question: ShenlunQuestion }) {
     },
   });
   const [loadingLevel, setLoadingLevel] = React.useState("");
-  const [locked, setLocked] = React.useState(false);
 
   async function loadLevel(level: "basic" | "advanced" | "expert") {
-    const usageId = `${question.id}-${level}`;
-    if (!canViewAnalysis(usageId)) {
-      setLocked(true);
-      return;
-    }
     setLoadingLevel(level);
     const data = (await requestAnalysis({
       questionId: question.id,
@@ -254,7 +226,6 @@ function ShenlunDetail({ question }: { question: ShenlunQuestion }) {
       level,
       questionText: `${question.material}\n\n${question.questions[0].requirement}`,
     })) as ShenlunAnalysis;
-    markAnalysisViewed(usageId);
     setAnalyses((current) => ({ ...current, [level]: data }));
     setLoadingLevel("");
   }
@@ -283,7 +254,9 @@ function ShenlunDetail({ question }: { question: ShenlunQuestion }) {
         <Card>
           <CardHeader>
             <div className="flex flex-wrap gap-2">
-              <Badge tone="gold">{question.year} · {question.province}</Badge>
+              <Badge tone="gold">
+                {question.year} · {question.province}
+              </Badge>
               <Badge>{question.questionTypeName}</Badge>
               <Badge tone="ink">{question.theme}</Badge>
             </div>
@@ -298,7 +271,6 @@ function ShenlunDetail({ question }: { question: ShenlunQuestion }) {
             <CardTitle>申论解析</CardTitle>
           </CardHeader>
           <CardContent>
-            {locked ? <PaywallNotice /> : null}
             <Tabs defaultValue="basic">
               <TabsList className="flex flex-wrap">
                 <TabsTrigger value="basic">答题思路</TabsTrigger>
@@ -323,17 +295,6 @@ function ShenlunDetail({ question }: { question: ShenlunQuestion }) {
       </div>
       <aside className="space-y-4">
         <RelatedActions questionId={question.id} />
-        {question.questionType === "zuowen" ? (
-          <Card>
-            <CardHeader>
-              <CardTitle>大作文专项</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 text-sm leading-6 text-ink/70">
-              <InfoBlock title="立意分析" content="中心论点：以人民为中心推进治理创新；分论点：需求导向、系统协同、结果评价。" />
-              <InfoBlock title="素材推荐" content="金句：民之所盼，政之所向。案例：一网通办、接诉即办、基层议事协商。" />
-            </CardContent>
-          </Card>
-        ) : null}
       </aside>
     </div>
   );
