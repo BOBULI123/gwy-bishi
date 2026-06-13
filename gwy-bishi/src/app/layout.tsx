@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   keywords: "公务员笔试真题,国考行测真题,省考申论真题,行测题库,申论范文,事业单位笔试",
   verification: {
     google: "3CiCI9H-cGunaJ1EG1xVaZlFMeQoIWcdghrWqSp3dc4",
+    other: {
+      "baidu-site-verification": "codeva-CLJN3WrKPi",
+    },
   },
 };
 
